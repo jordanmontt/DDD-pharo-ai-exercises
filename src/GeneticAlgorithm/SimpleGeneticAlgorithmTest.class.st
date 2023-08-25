@@ -63,6 +63,26 @@ SimpleGeneticAlgorithmTest >> testDoesItConverge [
 ]
 
 { #category : #tests }
+SimpleGeneticAlgorithmTest >> testEvolveOneGeneration [
+
+	| initialPopulation initialFitness firstIndividual initialGeneration |
+	initialPopulation := geneticAlgorithm generatePopulation.
+	initialFitness := initialPopulation sum: #fitness.
+	initialGeneration := geneticAlgorithm generations.
+	geneticAlgorithm evolveOneGeneration.
+
+	"Overall fitness should improve"
+	self assert: (geneticAlgorithm population sum: #fitness) > initialFitness.
+	"One generations has passed"
+	self assert: geneticAlgorithm generations > initialGeneration.
+
+	firstIndividual := geneticAlgorithm population first.
+	"Population should be sorted"
+	geneticAlgorithm population do: [ :individual |
+		self assert: firstIndividual fitness >= individual fitness ]
+]
+
+{ #category : #tests }
 SimpleGeneticAlgorithmTest >> testGeneratePopulation [
 
 	| population |
