@@ -14,15 +14,15 @@ Class {
 TravelingSalesmanChromosome class >> generateRandomIndividual [
 
 	| city cities |
-	city := $B asciiValue.
-	cities := OrderedCollection new.
-	TravelingSalesmanProblem numberOfCities - 1 timesRepeat: [
-		cities add: city asCharacter.
-		city := city + 1 ].
-	cities shuffle.
-	cities addFirst: $A.
-	cities add: $A.
-	^ self chromosome: cities
+	"Start with the second city, B"
+	
+	"Add the other cities in order until the last city."
+	
+	"Mix randonmly the collection"
+	
+	"Add initial city at the end and last"
+	
+	^ self chromosome: OrderedCollection new
 ]
 
 { #category : #comparing }
