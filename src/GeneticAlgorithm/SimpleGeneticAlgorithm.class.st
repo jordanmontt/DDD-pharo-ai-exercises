@@ -65,35 +65,25 @@ SimpleGeneticAlgorithm >> doesItConverge [
 SimpleGeneticAlgorithm >> evolveOneGeneration [
 
 	| numberOfCrosses rouletteWheelSelection father mother childOne childTwo descendants |
-	descendants := OrderedCollection empty.
-	numberOfCrosses := configurator initialPopulationSize * configurator crossProbability / 2.
 
-	"the indidividuals with a better fitness function will be more likely to be chosen"
-	rouletteWheelSelection := self rouletteWheelSelection.
+	"Number of crosses according to the population size and the cross probability, divided by 2"
 
-	[ numberOfCrosses = 0 ] whileFalse: [
+	"the indidividuals with a better fitness function will be more likely to be chosen.
+	Get roulette wheel selection collectiom"
+
+	"Do nunberOfCrosses times"
+	
 		"Select randomly the two individuals that will cross"
-		father := rouletteWheelSelection at: (random nextInteger: rouletteWheelSelection size).
-		mother := rouletteWheelSelection at: (random nextInteger: rouletteWheelSelection size).
+	
+		"Cross the individuals and obtain their descendants"		
 
-		"Cross the individuals and obtain their descendants"
-		childOne := father cross: mother.
-		childTwo := mother cross: father.
-
-		"Mutate the descendants"
-		childOne := self mutate: childOne.
-		childTwo := self mutate: childTwo.
+		"Mutate the descendants according to the mutation probability"
 
 		"Insert childre into the descendants population"
-		descendants add: childOne.
-		descendants add: childTwo.
-
-		numberOfCrosses := numberOfCrosses - 1 ].
 
 	"Join old population (population) with the new population (descendants)"
-	population addAll: descendants.
-	population := self reducePopulation.
-	generations := generations + 1
+
+	"Update generations"
 ]
 
 { #category : #'genetic algorithm' }
@@ -115,7 +105,7 @@ SimpleGeneticAlgorithm >> hasToMutate [
 	| probability randomNumber |
 	probability := self mutationIntegerProbability.
 	"Generate a random number within the probability"
-	randomNumber := random nextInteger: probability.
+
 	"Compare with arbitrary number"
 	^ false
 ]
