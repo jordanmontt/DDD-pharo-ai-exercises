@@ -7,7 +7,7 @@ Class {
 		'totalDistance',
 		'travelingSalesmanProblem'
 	],
-	#category : #'GeneticAlgorithm-Traveling-Salesman-Problem'
+	#category : #'GeneticAlgorithm-Core'
 }
 
 { #category : #'as yet unclassified' }

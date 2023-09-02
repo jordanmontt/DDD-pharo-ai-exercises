@@ -5,7 +5,7 @@ I represent the graph as an adjacency matrix.
 Class {
 	#name : #TravelingSalesmanProblem,
 	#superclass : #Object,
-	#category : #'GeneticAlgorithm-Traveling-Salesman-Problem'
+	#category : #'GeneticAlgorithm-Core'
 }
 
 { #category : #'as yet unclassified' }
