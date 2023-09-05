@@ -46,7 +46,7 @@ AIKMeans >> assignClusterToPoints: aCollectionOfPoints [
 	"Assign clusters to each point. We choose the cluster whose centroid minimizes has the
 	shortest distance to the point"
 
-	clusters := aCollectionOfPoints collect: [ :aPoint | self nearestCentroidToPoint: aPoint ]
+	clusters := {  }
 ]
 
 { #category : #accessing }
@@ -63,21 +63,8 @@ AIKMeans >> centroids: aCollectionOfPoints [
 
 { #category : #training }
 AIKMeans >> chooseRandomCentroid: aCollectionOfPoints [
-	"Algorithm:
-	
-	- Take the min and max value for each dimension of the point. If the point is a normal X,Y
-	point, take the min and max X value, and the min and max Y value.
-	- Choose a random number between the min and max range for each point dimension. "
 
-	| min max pointDimension |
-	pointDimension := aCollectionOfPoints first size.
-
-	^ (1 to: pointDimension)
-		  collect: [ :i |
-			  max := aCollectionOfPoints max: [ :point | point at: i ].
-			  min := aCollectionOfPoints min: [ :point | point at: i ].
-			  rand nextBetween: min and: max ]
-		  as: Array
+	^ #( 0 0 )
 ]
 
 { #category : #accessing }
@@ -97,42 +84,27 @@ AIKMeans >> clusters: aCollection [
 AIKMeans >> distanceBetween: firstPoint and: secondPoint [
 	"It follows the Euclidean distance between two points formula."
 
-	^ euclideanDistance distanceBetween: firstPoint and: secondPoint
-
-	"The below code is not idiomatic because of performance. We see that writting this instead
-	of  has a lot of performance improvements. If you are having performance issues, use the
-	below implementation. Another option that is in the middle, between is
-	`(firstPoint - secondPoint raisedTo: 2) sum sqrt`"
-
-	"| sum |
-	sum := 0.
-	1 to: firstPoint size do: [ :i | 
-		| diff |
-		diff := (firstPoint at: i) asFloat - (secondPoint at: i) asFloat.
-		sum := sum + (diff * diff) ].
-	^ sum sqrt"
+	^ 0
 ]
 
 { #category : #api }
 AIKMeans >> fit: aCollectionOfPoints [
 
+	"API method. This is the method that the user will call for using the KMeans algorithm"
 	| score bestScore bestCentroids |
-	aCollectionOfPoints ifEmpty: [ ^ self ].
-	bestScore := Float infinity.
 
 	timesToRun timesRepeat: [
 		self kMeansAlgorithm: aCollectionOfPoints.
 
 		"The best centroid points are the ones that minimize the score.
 		The score is the sum of the mean square errors of the points and its cluster."
-		score := self score: aCollectionOfPoints.
-		bestScore > score ifTrue: [
-			bestCentroids := centroids.
-			bestScore := score ] ].
+		
+		"Update the best score and best centroids here" ].
 
 	"We keep the best centroids after running the algo timesToRun-times"
 	centroids := bestCentroids.
-	self assignClusterToPoints: aCollectionOfPoints
+	
+	"Training is finished. There is one more method that you should call"
 ]
 
 { #category : #testing }
@@ -175,38 +147,26 @@ AIKMeans >> initializeCentroidsKMeansPlusPlus: points [
 	2. Calculate the distance of all the point to the choosen clusters. Keep the min distance of a point to the choosen clusters.
 	3. Choose the next cluster the point being the farest being the one with the most probability of being choose.
 	4. Repeat Steps 2 and 3 k centroids are selected"
-
-	| firstCentroid |
-	firstCentroid := points atRandom.
-	centroids := OrderedCollection with: firstCentroid.
-	
-	[ centroids size < numberOfClusters ] whileTrue: [
-		| distances pointWithMaxDistance |
-		distances := points collect: [ :aPoint | 
-			centroids min: [ :aCentroid | self distanceBetween: aPoint and: aCentroid ] ].
-		pointWithMaxDistance := points at: distances argmax.
-		centroids add: pointWithMaxDistance ]
 ]
 
 { #category : #training }
 AIKMeans >> initializeRandomCentroids: aCollectionOfPoints [
+	"Initializa randomly the centroids"
 
-	centroids := (1 to: numberOfClusters) collect: [ :i | 
-		self chooseRandomCentroid: aCollectionOfPoints ]
+	centroids := 'Something'
 ]
 
 { #category : #training }
 AIKMeans >> kMeansAlgorithm: aCollectionOfPoints [
 
 	performedIterations := 0.
-	"Initialize the centrois using the k-means++ algorithm"
-	self initializeCentroidsKMeansPlusPlus: aCollectionOfPoints.
-
+	"Initialize the centrois"
+	
+	"Do this loop at least one time."
 	[
 	self assignClusterToPoints: aCollectionOfPoints.
 	self updateCentroids: aCollectionOfPoints.
-	performedIterations := performedIterations + 1 ] 
-		doWhileFalse: [ self hasConverged or: [ self hasReachedMaxIterations ] ].
+	performedIterations := performedIterations + 1 ] "convert this to a loop"
 ]
 
 { #category : #accessing }
@@ -219,17 +179,11 @@ AIKMeans >> maxIterations: anInteger [
 AIKMeans >> nearestCentroidToPoint: aPoint [
 
 	| minDistance nearestCentroidIndex |	
-	minDistance := self distanceBetween: aPoint and: (centroids first).
-	nearestCentroidIndex := 1.
+	minDistance := 0. "initialize it to something that makes sense"
 
-	centroids doWithIndex: [ :centroid :i | 
-		| distance |
-		distance := self distanceBetween: aPoint and: centroid.
-		distance < minDistance ifTrue: [ 
-			minDistance := distance.
-			nearestCentroidIndex := i ] ].
-
-	^ nearestCentroidIndex
+	"Calculate the nearest distance and the nearest index of the centroid"
+	
+	^ nearestCentroidIndex "Return the index of the nearest centroid for the point aPoint"
 ]
 
 { #category : #accessing }
@@ -247,14 +201,9 @@ AIKMeans >> predict: aCollectionOfPoints [
 
 { #category : #api }
 AIKMeans >> score: aCollectionOfPoints [
-	"The score is the sum of the mean square errors of the points and its cluster."
+	"The score is the sum of all the distances of the points to their respective cluster."
 
-	| point centroid distances |
-	distances := (1 to: aCollectionOfPoints size) collect: [ :index |
-		point := aCollectionOfPoints at: index.
-		centroid := centroids at: (clusters at: index).
-		self distanceBetween: point and: centroid ].
-	^ distances sum
+	^ 0
 ]
 
 { #category : #accessing }
@@ -274,19 +223,9 @@ AIKMeans >> transform: aCollectionOfPoints [
 
 { #category : #training }
 AIKMeans >> updateCentroids: aCollectionOfPoints [
+	"Update each centroids by moving it to the center of all its points (take the average of
+	all the points that belong to each cluster).
+	Don't forget to update the centroids instance variable."
 
-	"Update centroids by moving them to the center of each cluster (mean of all points in the cluster)"
-
-	| pointsOfThisCentroid |
-
-	previousCentroids := centroids.
-
-	centroids := centroids withIndexCollect: [ :centroid :centroidIndex | 
-		pointsOfThisCentroid := (1 to: aCollectionOfPoints size)
-			select: [ :pointIndex | (clusters at: pointIndex) = centroidIndex ]
-			thenCollect: [ :pointIndex | aCollectionOfPoints at: pointIndex ].
-
-		pointsOfThisCentroid isEmpty
-			ifTrue: [ self chooseRandomCentroid: aCollectionOfPoints ]
-			ifFalse: [ pointsOfThisCentroid average ] ]
+	
 ]
