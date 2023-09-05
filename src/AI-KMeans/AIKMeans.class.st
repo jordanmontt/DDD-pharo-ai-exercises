@@ -110,10 +110,7 @@ AIKMeans >> fit: aCollectionOfPoints [
 { #category : #testing }
 AIKMeans >> hasConverged [
 
-	centroids with: previousCentroids do: [ :current :previous |
-		((self distanceBetween: current and: previous) closeTo: 0) ifFalse: [ ^ false ] ].
-
-	^ true
+	^ false
 ]
 
 { #category : #testing }
@@ -197,6 +194,13 @@ AIKMeans >> predict: aCollectionOfPoints [
 	"Asign each point to the closest centroid (in other words, cluster the points)"
 
 	^ aCollectionOfPoints collect: [ :point | self nearestCentroidToPoint: point ]
+]
+
+{ #category : #accessing }
+AIKMeans >> previousCentroids: aCollection [
+	"Method only used for testing"
+
+	previousCentroids := aCollection
 ]
 
 { #category : #api }
