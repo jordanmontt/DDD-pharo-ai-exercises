@@ -38,12 +38,6 @@ SimpleGeneticAlgorithm >> convergedGeneration: anInteger [
 
 { #category : #'genetic algorithm' }
 SimpleGeneticAlgorithm >> createMapHowManyTimesFitnessAppears [
-	"This is the same as doing `(population collect: #fitness) asBag` and then ask for the
-	values, for example with `aBag valuesAndCounts values`. But this implementation is faster."
-
-	"Create a map, or a Dictionary, that contains each fitness value of the population with how
-	many times that fitness value is present. So, count the ocurrences of the fitness values
-	in the population"
 
 	^ {  }
 ]
@@ -51,13 +45,6 @@ SimpleGeneticAlgorithm >> createMapHowManyTimesFitnessAppears [
 { #category : #'genetic algorithm' }
 SimpleGeneticAlgorithm >> doesItConverge [
 
-	| elementsThatMustHaveTheSameFitnessValue fitnessFrequency |
-	"Calculate the number of elements that should have the same value"
-	
-	fitnessFrequency := self createMapHowManyTimesFitnessAppears.
-	
-	"Search if there is the sufficient elements with the same value in the map."
-	
 	^ false
 ]
 
