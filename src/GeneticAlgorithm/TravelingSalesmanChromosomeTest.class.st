@@ -1,14 +1,16 @@
 Class {
-	#name : #TravelingSalesmanChromosomeTest,
-	#superclass : #TestCase,
+	#name : 'TravelingSalesmanChromosomeTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'travelingSalesmanProblem',
 		'chromosome'
 	],
-	#category : #'GeneticAlgorithm-Tests'
+	#category : 'GeneticAlgorithm-Tests',
+	#package : 'GeneticAlgorithm',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 TravelingSalesmanChromosomeTest >> calculateDistance: travelingSalesmanChromosome [
 
 	| distance startingValue chromosomeString distancesMatrix |
@@ -25,7 +27,7 @@ TravelingSalesmanChromosomeTest >> calculateDistance: travelingSalesmanChromosom
 	^ distance
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 TravelingSalesmanChromosomeTest >> setUp [
 
 	super setUp.
@@ -34,7 +36,7 @@ TravelingSalesmanChromosomeTest >> setUp [
 	chromosome := TravelingSalesmanChromosome chromosome: 'ABCDEFGHIJA'.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TravelingSalesmanChromosomeTest >> testCalculateFitness [
 
 	| distance chromosomeString |
@@ -46,7 +48,7 @@ TravelingSalesmanChromosomeTest >> testCalculateFitness [
 		equals: travelingSalesmanProblem maximumDistance + 2 - distance
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TravelingSalesmanChromosomeTest >> testCalculateTotalDistance [
 
 	self assert: chromosome calculateTotalDistance equals: 38.
@@ -60,19 +62,19 @@ TravelingSalesmanChromosomeTest >> testCalculateTotalDistance [
 	self assert: chromosome calculateTotalDistance equals: 20
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TravelingSalesmanChromosomeTest >> testChromosome [
 
 	self assert: chromosome chromosome class equals: OrderedCollection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TravelingSalesmanChromosomeTest >> testChromosomeSize [
 
 	self assert: chromosome chromosomeSize equals: 11
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TravelingSalesmanChromosomeTest >> testChromosomeString [
 
 	self assert: chromosome chromosomeString class equals: ByteString.
@@ -81,7 +83,7 @@ TravelingSalesmanChromosomeTest >> testChromosomeString [
 		equals: chromosome chromosomeSize
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TravelingSalesmanChromosomeTest >> testCross [
 
 	| chromosomeOne chromosomeTwo child |
@@ -96,7 +98,7 @@ TravelingSalesmanChromosomeTest >> testCross [
 	self assertCollection: (child chromosomeString copyFrom: 2 to: child chromosomeString size - 1) hasSameElements: 'BCDEFGHIJ'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TravelingSalesmanChromosomeTest >> testGenerateRandomIndividual [
 
 	| chromosomeString |
@@ -114,7 +116,7 @@ TravelingSalesmanChromosomeTest >> testGenerateRandomIndividual [
 		hasSameElements: 'BCDEFGHIJ'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TravelingSalesmanChromosomeTest >> testMutate [
 
 	| originalChromosomeString difference |
@@ -134,7 +136,7 @@ TravelingSalesmanChromosomeTest >> testMutate [
 	self assertCollection: chromosome removeHomeCity hasSameElements: 'BCDEFGHIJ'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TravelingSalesmanChromosomeTest >> testRemoveHomeCity [
 
 	| chromosomeCollection |

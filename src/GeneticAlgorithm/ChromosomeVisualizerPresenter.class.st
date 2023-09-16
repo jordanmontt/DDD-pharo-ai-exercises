@@ -1,15 +1,17 @@
 Class {
-	#name : #ChromosomeVisualizerPresenter,
-	#superclass : #SpRoassalPresenter,
+	#name : 'ChromosomeVisualizerPresenter',
+	#superclass : 'SpRoassalPresenter',
 	#instVars : [
 		'individual',
 		'travelingSalesman',
 		'geneticAlgorithm'
 	],
-	#category : #'GeneticAlgorithm-UI'
+	#category : 'GeneticAlgorithm-UI',
+	#package : 'GeneticAlgorithm',
+	#tag : 'UI'
 }
 
-{ #category : #roassal }
+{ #category : 'roassal' }
 ChromosomeVisualizerPresenter >> addLegend: canvas [
 
 	| label |
@@ -19,7 +21,7 @@ ChromosomeVisualizerPresenter >> addLegend: canvas [
 	canvas addShape: label
 ]
 
-{ #category : #roassal }
+{ #category : 'roassal' }
 ChromosomeVisualizerPresenter >> createEdges: nodes [
 
 	| edges |
@@ -30,7 +32,7 @@ ChromosomeVisualizerPresenter >> createEdges: nodes [
 	^ edges
 ]
 
-{ #category : #roassal }
+{ #category : 'roassal' }
 ChromosomeVisualizerPresenter >> createNodes [
 
 	| boxes labels models colors |
@@ -50,19 +52,19 @@ ChromosomeVisualizerPresenter >> createNodes [
 	^ RSComposite models: models boxes: boxes labels: labels
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ChromosomeVisualizerPresenter >> geneticAlgorithm: ga [
 
 	geneticAlgorithm := ga
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ChromosomeVisualizerPresenter >> individual: anIndividual [
 
 	individual := anIndividual
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ChromosomeVisualizerPresenter >> initialize [
 
 	super initialize.
@@ -71,7 +73,7 @@ ChromosomeVisualizerPresenter >> initialize [
 	travelingSalesman := TravelingSalesmanProblem new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ChromosomeVisualizerPresenter >> legengText [
 
 	^ 'Generation: ' , geneticAlgorithm generations asString , String cr , 'Fitness: '
@@ -79,7 +81,7 @@ ChromosomeVisualizerPresenter >> legengText [
 	  , String cr , ' Has converged: ' , geneticAlgorithm doesItConverge asString
 ]
 
-{ #category : #roassal }
+{ #category : 'roassal' }
 ChromosomeVisualizerPresenter >> makeLayout: canvas [
 
 	| forceBasedLayout |
@@ -104,7 +106,7 @@ ChromosomeVisualizerPresenter >> makeLayout: canvas [
 	canvas nodes @ (RSDraggableForceInteraction new layout: forceBasedLayout)
 ]
 
-{ #category : #roassal }
+{ #category : 'roassal' }
 ChromosomeVisualizerPresenter >> makeLineFrom: a to: b [
 
 	| distance |
@@ -118,7 +120,7 @@ ChromosomeVisualizerPresenter >> makeLineFrom: a to: b [
 		  yourself
 ]
 
-{ #category : #roassal }
+{ #category : 'roassal' }
 ChromosomeVisualizerPresenter >> renderIn: canvas [
 
 	| nodes |

@@ -1,1 +1,1 @@
-Package { #name : #GeneticAlgorithm }
+Package { #name : 'GeneticAlgorithm' }

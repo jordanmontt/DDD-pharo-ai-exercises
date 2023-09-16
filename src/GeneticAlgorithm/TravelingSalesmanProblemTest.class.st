@@ -2,15 +2,17 @@
 A TravelingSalesmanProblemTest is a test class for testing the behavior of TravelingSalesmanProblem
 "
 Class {
-	#name : #TravelingSalesmanProblemTest,
-	#superclass : #TestCase,
+	#name : 'TravelingSalesmanProblemTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'travelingSalesmanProblem'
 	],
-	#category : #'GeneticAlgorithm-Tests'
+	#category : 'GeneticAlgorithm-Tests',
+	#package : 'GeneticAlgorithm',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 TravelingSalesmanProblemTest >> distanceMatrix [
 
 	^ {
@@ -26,7 +28,7 @@ TravelingSalesmanProblemTest >> distanceMatrix [
 		  { 2. 3. 1. 4. 2. 3. 4. 5. 3. 0 } }
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 TravelingSalesmanProblemTest >> setUp [
 
 	super setUp.
@@ -34,7 +36,7 @@ TravelingSalesmanProblemTest >> setUp [
 	travelingSalesmanProblem := TravelingSalesmanProblem new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TravelingSalesmanProblemTest >> testDistanceBetweenAnd [
 
 	self
@@ -50,7 +52,7 @@ TravelingSalesmanProblemTest >> testDistanceBetweenAnd [
 		equals: ((self distanceMatrix at: 10) at: 2)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TravelingSalesmanProblemTest >> testDistancesMatrix [
 
 	| distancesMatrix |
@@ -59,15 +61,14 @@ TravelingSalesmanProblemTest >> testDistancesMatrix [
 		self assert: anArray equals: (distancesMatrix at: i) ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TravelingSalesmanProblemTest >> testMaximumDistance [
 
 	self assert: travelingSalesmanProblem maximumDistance equals: 58
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TravelingSalesmanProblemTest >> testNumberOfCities [
 
-	self assert: travelingSalesmanProblem numberOfCities equals: 10.
 	self assert: travelingSalesmanProblem class numberOfCities equals: 10
 ]

@@ -1,6 +1,6 @@
 Class {
-	#name : #SimpleGAPresenter,
-	#superclass : #SpPresenter,
+	#name : 'SimpleGAPresenter',
+	#superclass : 'SpPresenter',
 	#instVars : [
 		'geneticAlgorithm',
 		'evolveButton',
@@ -9,17 +9,19 @@ Class {
 		'chromosomeVisualizerPresenter',
 		'inspectButton'
 	],
-	#category : #'GeneticAlgorithm-UI'
+	#category : 'GeneticAlgorithm-UI',
+	#package : 'GeneticAlgorithm',
+	#tag : 'UI'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SimpleGAPresenter class >> open [
 
 	<script>
 	^ self new open
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SimpleGAPresenter >> connectPresenters [
 
 	evolveButton action: [ self evolveAction ].
@@ -28,7 +30,7 @@ SimpleGAPresenter >> connectPresenters [
 	generatePopulationButton action: [ self generateRandomPopulationAction ]
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 SimpleGAPresenter >> defaultLayout [
 
 	^ SpBoxLayout newTopToBottom
@@ -43,7 +45,7 @@ SimpleGAPresenter >> defaultLayout [
 		  yourself
 ]
 
-{ #category : #action }
+{ #category : 'action' }
 SimpleGAPresenter >> evolveAction [
 
 	geneticAlgorithm population ifNil: [
@@ -60,7 +62,7 @@ SimpleGAPresenter >> evolveAction [
 		refresh
 ]
 
-{ #category : #action }
+{ #category : 'action' }
 SimpleGAPresenter >> generateRandomPopulationAction [
 
 	geneticAlgorithm generatePopulation.
@@ -70,14 +72,14 @@ SimpleGAPresenter >> generateRandomPopulationAction [
 		refresh
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SimpleGAPresenter >> initialize [
 
 	geneticAlgorithm := SimpleGeneticAlgorithm new.
 	super initialize
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SimpleGAPresenter >> initializePresenters [
 
 	chromosomeVisualizerPresenter := self instantiate: ChromosomeVisualizerPresenter.
@@ -98,7 +100,7 @@ SimpleGAPresenter >> initializePresenters [
 		yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SimpleGAPresenter >> initializeWindow: aWindowPresenter [
 
 	aWindowPresenter
@@ -106,13 +108,13 @@ SimpleGAPresenter >> initializeWindow: aWindowPresenter [
 		initialExtent: 600 @ 500
 ]
 
-{ #category : #action }
+{ #category : 'action' }
 SimpleGAPresenter >> inspectAction [
 
 	geneticAlgorithm inspect
 ]
 
-{ #category : #action }
+{ #category : 'action' }
 SimpleGAPresenter >> openAlertModal [
 
 	| alertModal |
@@ -123,7 +125,7 @@ SimpleGAPresenter >> openAlertModal [
 		open
 ]
 
-{ #category : #action }
+{ #category : 'action' }
 SimpleGAPresenter >> resetAction [
 
 	geneticAlgorithm := SimpleGeneticAlgorithm new.

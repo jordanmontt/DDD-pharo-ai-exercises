@@ -2,12 +2,14 @@
 A GeneticAlgorithmConfiguratorTest is a test class for testing the behavior of GeneticAlgorithmConfigurator
 "
 Class {
-	#name : #GeneticAlgorithmConfiguratorTest,
-	#superclass : #TestCase,
-	#category : #'GeneticAlgorithm-Tests'
+	#name : 'GeneticAlgorithmConfiguratorTest',
+	#superclass : 'TestCase',
+	#category : 'GeneticAlgorithm-Tests',
+	#package : 'GeneticAlgorithm',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 GeneticAlgorithmConfiguratorTest >> testInitialize [
 
 	| configurator |

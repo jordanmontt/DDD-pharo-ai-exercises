@@ -2,15 +2,17 @@
 A GeneticAlgorithmTest is a test class for testing the behavior of GeneticAlgorithm
 "
 Class {
-	#name : #SimpleGeneticAlgorithmTest,
-	#superclass : #TestCase,
+	#name : 'SimpleGeneticAlgorithmTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'geneticAlgorithm'
 	],
-	#category : #'GeneticAlgorithm-Tests'
+	#category : 'GeneticAlgorithm-Tests',
+	#package : 'GeneticAlgorithm',
+	#tag : 'Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SimpleGeneticAlgorithmTest >> setUp [
 
 	super setUp.
@@ -18,7 +20,7 @@ SimpleGeneticAlgorithmTest >> setUp [
 	geneticAlgorithm := SimpleGeneticAlgorithm new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SimpleGeneticAlgorithmTest >> testCreateMapHowManyTimesFitnessAppears [
 
 	| individualOne individualTwo map |
@@ -35,7 +37,7 @@ SimpleGeneticAlgorithmTest >> testCreateMapHowManyTimesFitnessAppears [
 	self assert: (map at: individualTwo fitness) equals: 2.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SimpleGeneticAlgorithmTest >> testDoesItConverge [
 
 	| population populationSize convergenceRate |
@@ -62,7 +64,7 @@ SimpleGeneticAlgorithmTest >> testDoesItConverge [
 	self deny: geneticAlgorithm doesItConverge
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SimpleGeneticAlgorithmTest >> testEvolveOneGeneration [
 
 	| initialPopulation initialFitness firstIndividual initialGeneration |
@@ -82,7 +84,7 @@ SimpleGeneticAlgorithmTest >> testEvolveOneGeneration [
 		self assert: firstIndividual fitness >= individual fitness ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SimpleGeneticAlgorithmTest >> testGeneratePopulation [
 
 	| population |
@@ -92,14 +94,14 @@ SimpleGeneticAlgorithmTest >> testGeneratePopulation [
 		self assert: individual class equals: TravelingSalesmanChromosome ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SimpleGeneticAlgorithmTest >> testMutationIntegerProbability [
 
 	geneticAlgorithm configurator mutationProbability: 0.0002.
 	self assert: geneticAlgorithm mutationIntegerProbability equals: 5000
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SimpleGeneticAlgorithmTest >> testReducePopulation [
 
 	| population lowDistanceIndividual highDistanceIndividual reducedPopulation |
@@ -122,7 +124,7 @@ SimpleGeneticAlgorithmTest >> testReducePopulation [
 		equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SimpleGeneticAlgorithmTest >> testRouletteWheelSelection [
 
 	| chromosomes population frequencies |
@@ -141,7 +143,7 @@ SimpleGeneticAlgorithmTest >> testRouletteWheelSelection [
 		self assert: (frequencies at: individual) equals: individual fitness ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SimpleGeneticAlgorithmTest >> testRun [
 
 	| solution |
